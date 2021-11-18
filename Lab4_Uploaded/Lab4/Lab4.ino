@@ -2,9 +2,11 @@
 #include <NewTone.h>
 
 
-#define recPin 3
 IRrecv irrecv(recPin);
 decode_results results;
+#define recPin 3
+#define buzzerPin 2
+#define ledPin 13
 #define DEBOUNCE_DELAY 700
 #define PRINT_DELAY 500
 unsigned long lastDebounceTime = 0;
@@ -15,9 +17,9 @@ int remoteInputLength  = 0;
 
 
 void setup(){
-	pinMode(13, OUTPUT);
+	pinMode(ledPin, OUTPUT);
   pinMode(recPin, INPUT);
-  pinMode(2, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
   irrecv.enableIRIn();
   Serial.begin(9600);
 	}
@@ -60,27 +62,19 @@ void loop(){
         default : break;
         
       }
-
-      
-     
-
-      
-      
-
-
     }
   }
 
   
   if(celsius > sensorThreshold.toInt()){
-    digitalWrite(13, HIGH);
-    NewTone(2, 3000);
+    digitalWrite(ledPin, HIGH);
+    NewTone(buzzerPin, 3000);
     
     
   }
   else{
-    digitalWrite(13, LOW);
-    noNewTone(2);
+    digitalWrite(ledPin, LOW);
+    noNewTone(buzzerPin);
     
   }
 
@@ -91,7 +85,7 @@ void loop(){
     lastPrintTime = millis();
   }
 
- // delay(1000);
+
 
   
     
