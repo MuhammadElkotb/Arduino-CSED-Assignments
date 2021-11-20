@@ -5,7 +5,6 @@
 #define recPin 3
 #define buzzerPin 2
 #define ledPin 13
-#define PRINT_DELAY 500
 
 IRrecv irrecv(recPin);
 decode_results results;
